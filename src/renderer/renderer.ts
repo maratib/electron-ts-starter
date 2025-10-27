@@ -1,3 +1,13 @@
+/**
+ * The renderer process is responsible for rendering the user interface of your Electron application. 
+ * Displays web pages (HTML, CSS, JavaScript).
+ * 
+ * Each BrowserWindow instance in your Electron app runs in its own dedicated renderer process.
+ * 
+ * Renderer processes, for security reasons, do not have direct access to Node.js APIs by default. 
+ * They are isolated from the operating system and the main process to prevent malicious web content from compromising the system.
+ */
+
 class RendererApp {
   private messageInput: HTMLInputElement;
   private sendButton: HTMLButtonElement;

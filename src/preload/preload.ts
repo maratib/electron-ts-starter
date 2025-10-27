@@ -1,3 +1,20 @@
+/**
+ * A preload script is a JavaScript file that runs in the renderer process before its web content (HTML, CSS, and other renderer-specific JavaScript) begins loading.
+ * 
+ * The key characteristic of a preload script is that it runs in the same global context as the renderer process but with access to Node.js APIs. 
+ * This creates a bridge between the secure, isolated renderer environment and the more privileged Node.js environment.
+ * 
+ * Preload scripts are typically used to:
+ * Securely expose specific Node.js APIs or functionalities to the renderer process: This is done using contextBridge.exposeInMainWorld, 
+ * which creates a secure, isolated API that the renderer can interact with without direct access to Node.js.
+ * 
+ * Perform initial setup or configuration within the renderer's context before the main web content loads.
+ * Set up inter-process communication (IPC) channels: between the renderer and the main process, allowing them to exchange messages and data.
+ * 
+ */
+
+
+
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
 // Define the API that will be exposed to the renderer process

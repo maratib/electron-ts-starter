@@ -1,3 +1,14 @@
+/**
+ * The Main Process is the Node.js environment that runs the main.js file.
+ * 
+ * It's responsible for managing the application's lifecycle, creating and controlling BrowserWindow instances (which are your application windows), 
+ * and interacting with the operating system (e.g., creating menus, handling system events, accessing the file system).
+ * 
+ * The Main Process has full Node.js API access and can use any Node.js modules or packages installed via npm.
+ * There is only one Main Process in an Electron application.
+ * 
+ */
+
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 
