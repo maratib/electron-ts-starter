@@ -1,0 +1,66 @@
+$color_1: #333;
+$color_2: white;
+$font-family_1: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$background-color_1: #f5f5f5;
+$background-color_2: #007acc;
+$background-color_3: #005a9e;
+$background-color_4: #fafafa;
+$background-color_5: #e8f4f8;
+
+body {
+	font-family: $font-family_1;
+	margin: 0;
+	padding: 20px;
+	background-color: $background-color_1;
+}
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+h1 {
+	color: $color_1;
+	text-align: center;
+}
+.input-group {
+	margin: 20px 0;
+	display: flex;
+	gap: 10px;
+}
+input[type="text"] {
+	flex: 1;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 16px;
+}
+button {
+	padding: 10px 20px;
+	background-color: $background-color_2;
+	color: $color_2;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+	&:hover {
+		background-color: $background-color_3;
+	}
+}
+.output {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 10px;
+	height: 200px;
+	overflow-y: auto;
+	background-color: $background-color_4;
+	margin-top: 20px;
+}
+.system-info {
+	background-color: $background-color_5;
+	padding: 15px;
+	border-radius: 4px;
+	margin-top: 20px;
+}

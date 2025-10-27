@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electron TypeScript App</title>
+    <link rel="stylesheet" href="./src/assets/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Electron TypeScript App</h1>
+        
+        <div class="input-group">
+            <input type="text" id="messageInput" placeholder="Enter a message to send to main process...">
+            <button id="sendButton">Send Message</button>
+        </div>
+        
+        <div class="output" id="output">
+            <!-- Output messages will appear here -->
+        </div>
+        
+        <div class="system-info" id="systemInfo">
+            <!-- System information will appear here -->
+        </div>
+    </div>
+
+    <script src="dist/renderer/renderer.js"></script>
+</body>
+</html>
