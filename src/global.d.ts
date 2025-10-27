@@ -3,6 +3,7 @@
 declare global {
   interface Window {
     electronAPI: ElectronAPI;
+    isMac: boolean;
   }
 }
 
