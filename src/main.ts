@@ -9,104 +9,47 @@
  *
  */
 
-import {
-  app,
-  BrowserWindow,
-  ipcMain,
-  Menu,
-  MenuItemConstructorOptions,
-} from "electron";
-import * as path from "path";
-import { IPCHandler } from "./ipc-handler";
+import { app, BrowserWindow } from "electron";
+import { IpcHelper, MenuHelper, WindowHelper } from "./helpers";
+import { Const } from "./lib/Const";
 
-class App {
-  private mainWindow: BrowserWindow | null = null;
-  static isMac = process.platform === "darwin";
-
+class Main {
   constructor() {
     this.setupApp();
   }
 
-  private createMenu() {
-    const menuTemplate: MenuItemConstructorOptions[] = [
-      {
-        label: "File",
-        submenu: [
-          {
-            label: "New",
-            accelerator: "CmdOrCtrl+N",
-            click: () => console.log("New file"),
-          },
-          { type: "separator" },
-          { label: "Exit", role: "quit" },
-        ],
-      },
-      {
-        label: "Edit",
-        submenu: [
-          { role: "undo" },
-          { role: "redo" },
-          { type: "separator" },
-          { role: "cut" },
-          { role: "copy" },
-          { role: "paste" },
-        ],
-      },
-    ];
-
-    if (App.isMac) menuTemplate.unshift({ label: "" });
-
-    const menu = Menu.buildFromTemplate(menuTemplate);
-    Menu.setApplicationMenu(menu);
-  }
-
   private setupApp(): void {
     app.whenReady().then(() => {
-      this.createMenu();
-
-      this.createWindow();
-
+      new MenuHelper().setup();
+      console.log("MainWindow : ", Const.mainWindow);
+      new WindowHelper().setup();
       app.on("activate", () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-          this.createWindow();
+        console.log("app-activate called");
+        if (Const.mainWindow === null) {
+          console.log("calling Const.mainWindow : 1");
+          new WindowHelper().setup();
+        } else {
+          console.log("calling Const.mainWindow : ");
+          Const.mainWindow!.show();
         }
       });
     });
 
     app.on("window-all-closed", () => {
+      console.log("window-all-closed");
       if (process.platform !== "darwin") {
         app.quit();
       }
     });
 
-    this.setupIpcHandlers();
-  }
-
-  private createWindow(): void {
-    this.mainWindow = new BrowserWindow({
-      width: 1200,
-      height: 800,
-      webPreferences: {
-        nodeIntegration: false,
-        contextIsolation: true,
-        preload: path.join(__dirname, "./preload/preload.js"),
-      },
+    app.on("before-quit", () => {
+      Const.isQuitting = true;
     });
 
-    const isDev = process.env.NODE_ENV === "development";
-
-    if (isDev) {
-      this.mainWindow.loadFile("index.html");
-      this.mainWindow.webContents.openDevTools();
-    } else {
-      this.mainWindow.loadFile("index.html");
-    }
-  }
-
-  private setupIpcHandlers(): void {
-    new IPCHandler(app, ipcMain, this.mainWindow);
+    // this.setupIpcHandlers();
+    new IpcHelper().setup();
   }
 }
 
 // Initialize the app
-new App();
+new Main();
